@@ -1,6 +1,7 @@
 let snake;
 let scl=20;
-let container=document.querySelector('.container');
+let container1=document.querySelector('.container-1');
+let container2=document.querySelector('.container-2');
 let totalScore=document.querySelector('.total');
 let food;
 
@@ -83,7 +84,7 @@ class Snake{
       let d=dist(this.x,this.y,square.x,square.y);
       if(d<1){
         totalScore.innerText=this.total;
-        container.style.display='block';
+        container2.style.display='block';
         this.total=0;
         this.tail=[];
         
@@ -93,6 +94,7 @@ class Snake{
 }
 
 function keyPressed(){
+  container1.style.display='none';
   if(keyCode===UP_ARROW){
     if(snake.yspeed==0){snake.dir(0,-1);}
   }else if(keyCode===DOWN_ARROW){
@@ -103,7 +105,8 @@ function keyPressed(){
     if(snake.xspeed==0){snake.dir(1,0);}
   }
   if(keyCode===32){
-    container.style.display='none';
+    container2.style.display='none';
+    container1.style.display='block';
   }
 }
 
