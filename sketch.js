@@ -1,18 +1,26 @@
 let snake;
 let scl=20;
+let diffContainer=document.querySelector('.difficulty');
 let container1=document.querySelector('.container-1');
 let container2=document.querySelector('.container-2');
 let totalScore=document.querySelector('.total');
+let buttons=document.querySelectorAll('button');
+let counter=document.querySelector('.counter');
 let food;
+let colors=[255,56,100,1,186,239,32,191,85,255,95,10];
+let randomIndex={
+  newFill1:0,
+  newFill2:1,
+  newFill3:2,
+};
 
 function setup() {
   createCanvas(600, 600);
   snake = new Snake();
-  frameRate(20);
+  frameRate(5);
+  randomIndex=snake.randomColor();
  
   food=pickLocation();
-  // window.food=createVector(random(width),random(height));
-  // console.log(window.food);
 }
 
 function draw() {
@@ -24,7 +32,7 @@ function draw() {
   if(snake.eat(food)){
     food=pickLocation();
   }
-  fill(255,0,100);
+  fill(colors[randomIndex.newFill1],colors[randomIndex.newFill2],colors[randomIndex.newFill3]);
   rect(food.x,food.y,scl,scl);
 }
 
@@ -45,6 +53,17 @@ class Snake{
     this.total=0;
     this.tail=[];
   }
+  
+  randomColor(){
+    let randomNr=(Math.floor(Math.random() * 4))*3;
+    let newFill1=randomNr;
+    let newFill2=randomNr+1;
+    let newFill3=randomNr+2;
+    return {
+      newFill1,newFill2,newFill3
+    };
+  }
+
   update(){
     // snake.death();
     for(let i=0;i<this.tail.length-1;i++){
@@ -73,6 +92,8 @@ class Snake{
     let d = dist(this.x,this.y,pos.x,pos.y);
     if(d<1){
       this.total++;
+      counter.innerText=this.total;
+      randomIndex=this.randomColor();
       return true;
     }
     else{
@@ -110,3 +131,24 @@ function keyPressed(){
   }
 }
 
+function chooseDifficulty(e){
+  switch(e.target.className){
+    case 'easy':
+      frameRate(15);
+      break;
+    case 'medium':
+      frameRate(25);
+      break;
+    case 'hard':
+      frameRate(35);
+      break;
+  }
+  diffContainer.style.display='none';
+  container1.style.display='block';
+}
+
+buttons.forEach(button=>{
+  button.addEventListener('click',function(e){
+    chooseDifficulty(e);
+  });
+})

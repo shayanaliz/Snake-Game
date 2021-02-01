@@ -19,13 +19,13 @@ canvas {
   display: none;
 }
 
-.container-1 {
+.container {
   z-index: 10;
   background: rgba(0, 0, 0, 0.8);
   width: calc(100vw - (100vw - 100%));
   height: 100vh;
   position: absolute;
-  display: block;
+  display: none;
 }
 
 .game-over {
@@ -44,4 +44,47 @@ canvas {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.difficulty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.select-difficulty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  display: block;
+  background: none;
+  color: white;
+  font-family: "Press Start 2P", cursive;
+  cursor: pointer;
+  width: 20rem;
+  height: 4rem;
+  margin: 1.5rem;
+  padding: 0.5rem 0rem;
+  font-size: 2rem;
+}
+
+button:hover {
+  background: white;
+  color: black;
+}
+
+.selectdiff {
+  color: white;
+}
+
+.total-counter {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
